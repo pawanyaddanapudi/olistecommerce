@@ -1,0 +1,6 @@
+# You might install new packages or new infra setup
+# python version
+# psycopg2
+# sqlalchemy
+# pandas
+# haversine
