@@ -28,6 +28,8 @@ def job6_table1_inc():
     raw_data_sql = "select * from olist_staging.orskl_staging_rawdata where order_purchase_timestamp > '" + str(
         order_max_time) + "'"
     raw_data = pd.read_sql(raw_data_sql, pg_engine)
+    # Below distance computation should be done only if raw_data dataframe is non empty.
+    # This will avoid the errors we have seen when the pipeline was executed & there is no new data to process
     raw_data['distance'] = raw_data[['order_id','seller_id','customer_id','geolocation_lat_x',
                             'geolocation_lat_y', 'geolocation_lng_x','geolocation_lng_y']].\
     apply(lambda x: haversine((float(x['geolocation_lat_x']),float(x['geolocation_lng_x'])),

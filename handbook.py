@@ -58,5 +58,37 @@ pd.to_datetime(orders['order_purchase_timestamp'], format='%Y-%m-%d %H:%M:%S').\
 rawdata_sql = 'select * from olist_staging.orskl_olist_rawdata'
 rawdata = pd.read_sql(rawdata_sql, pg_engine)
 
+data_path = '/Users/pawanyaddanapudi/GDrive_kumar_OrSkl/OrSklDataAnalytics/BigDataEngineering/BigDataEngineeringBooster/datasets/YouTubeTrendingVideos/'
 
 
+CA_df = pd.read_csv(data_path+'CAvideos.csv', header=0)
+CA_df['trending_date'] = pd.to_datetime(CA_df['trending_date'], format='%y.%d.%m')
+CA_df_2017 = CA_df[CA_df['trending_date']<'2018-01-01']
+CA_df_2018_1 = CA_df[(CA_df['trending_date']>='2018-01-01') & (CA_df['trending_date']<'2018-04-01')]
+CA_df_2018_2 = CA_df[CA_df['trending_date']>='2018-04-01']
+CA_df_2017.to_csv(data_path+'CAvideos_2017.csv',index=False, header=False)
+CA_df_2018_1.to_csv(data_path+'CAvideos_2018_1.csv',index=False, header=False)
+CA_df_2018_2.to_csv(data_path+'CAvideos_2018_2.csv',index=False, header=False)
+
+
+DE_df = pd.read_csv(data_path+'DEvideos.csv', header=0)
+DE_df['trending_date'] = pd.to_datetime(DE_df['trending_date'], format='%y.%d.%m')
+DE_df_2017 = DE_df[DE_df['trending_date']<'2018-01-01']
+DE_df_2018_1 = DE_df[(DE_df['trending_date']>='2018-01-01') & (DE_df['trending_date']<'2018-04-01')]
+DE_df_2018_2 = DE_df[DE_df['trending_date']>='2018-04-01']
+DE_df_2017.to_csv(data_path+'DEvideos_2017.csv',index=False, header=False)
+DE_df_2018_1.to_csv(data_path+'DEvideos_2018_1.csv',index=False, header=False)
+DE_df_2018_2.to_csv(data_path+'DEvideos_2018_2.csv',index=False, header=False)
+
+
+FR_df = pd.read_csv(data_path+'DEvideos.csv', header=0)
+FR_df['trending_date'] = pd.to_datetime(FR_df['trending_date'], format='%y.%d.%m')
+FR_df_2017 = FR_df[FR_df['trending_date']<'2018-01-01']
+FR_df_2018_1 = FR_df[(FR_df['trending_date']>='2018-01-01') & (FR_df['trending_date']<'2018-04-01')]
+FR_df_2018_2 = FR_df[FR_df['trending_date']>='2018-04-01']
+FR_df_2017.to_csv(data_path+'FRvideos_2017.csv',index=False, header=False)
+FR_df_2018_1.to_csv(data_path+'FRvideos_2018_1.csv',index=False, header=False)
+FR_df_2018_2.to_csv(data_path+'FRvideos_2018_2.csv',index=False, header=False)
+
+from datetime import datetime
+print(datetime.now().strftime('%y-%m-%d'))

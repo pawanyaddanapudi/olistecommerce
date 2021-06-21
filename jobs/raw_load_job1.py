@@ -5,9 +5,11 @@
 import pandas as pd
 from sqlalchemy import create_engine
 import psycopg2
+import logging as logger
 
 def initial_load():
-    pg_engine = psycopg2.connect(dbname='airflow', host='localhost', port=5032, user='airflow', password='airflow')
+    logger.info("Trying to connect to the database")
+    pg_engine = psycopg2.connect(dbname='airflow', host='postgres', port=5432, user='airflow', password='airflow')
     conn = create_engine('postgresql://airflow:airflow@localhost:5032/airflow')
 
     customers_sql = 'select * from olist.orskl_customers'
@@ -27,7 +29,7 @@ def initial_load():
 
     orders_sql = 'select * from olist.orskl_orders'
     orders = pd.read_sql(orders_sql, pg_engine)
-
+    logger.info(f'The number of records in the order table is {orders}'.format(orders=len(orders)))
     products_sql = 'select * from olist.orskl_products'
     products = pd.read_sql(products_sql, pg_engine)
 
@@ -61,8 +63,6 @@ def initial_load():
     olist_final.to_sql("orskl_staging_rawdata", con=conn, schema='olist_staging', index=False)
 
 def raw_data_job1_inc():
-    # pg_engine = psycopg2.connect(dbname='airflow', host='localhost', port=5032, user='airflow', password='airflow')
-    # conn = create_engine('postgresql://airflow:airflow@localhost:5032/airflow')
     pg_engine = psycopg2.connect(dbname='airflow', host='postgres', port=5432, user='airflow', password='airflow')
     conn = create_engine('postgresql://airflow:airflow@postgres/airflow')
 
