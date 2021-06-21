@@ -92,3 +92,15 @@ FR_df_2018_2.to_csv(data_path+'FRvideos_2018_2.csv',index=False, header=False)
 
 from datetime import datetime
 print(datetime.now().strftime('%y-%m-%d'))
+
+
+from pyspark.sql import SparkSession
+spark = SparkSession \
+    .builder \
+    .appName("Python Spark SQL basic example") \
+    .getOrCreate()
+
+df = spark.read.json("/Users/pawanyaddanapudi/GDrive_kumar_OrSkl/OrSklDataAnalytics/BigDataEngineering/BigDataEngineeringBooster/datasets/YouTubeTrendingVideos/CA_category_id.json")
+
+df.printSchema()
+df.show()

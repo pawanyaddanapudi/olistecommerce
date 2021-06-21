@@ -4,10 +4,10 @@ from datetime import datetime, timedelta
 
 import sys
 sys.path.insert(0, "/opt/airflow/olistecommerce/")
-from jobs.raw_load_job1 import *
-from jobs.customers_mart import *
-from jobs.geographics_mart import *
-from jobs.reviews_mart import *
+from jobs2.raw_load_job1 import *
+from jobs2.customers_mart import *
+from jobs2.geographics_mart import *
+from jobs2.reviews_mart import *
 
 
 
@@ -21,7 +21,7 @@ default_args = {
 }
 
 with DAG(
-    'OlistDataPipeline',
+    'OlistPipeline',
     default_args=default_args,
     start_date=datetime(2021,6,11,5,55,00),
     tags=['python', 'pipeline','olist'],
